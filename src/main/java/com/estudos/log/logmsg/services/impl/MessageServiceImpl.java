@@ -5,6 +5,7 @@ import com.estudos.log.logmsg.domain.repository.MessagesRepository;
 import com.estudos.log.logmsg.services.MessageService;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,9 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Messages> getMessages() {
-        return messagesRepository.findAllMessagesNotLog();
+    public Optional<List<Messages>> getMessages() throws Exception {
+        Optional<List<Messages>> messages;
+        return Optional.ofNullable(messagesRepository.findAllMessagesNotLog().orElseThrow(() -> new Exception("Erro na busca dos dados")));
     }
 
     @Override

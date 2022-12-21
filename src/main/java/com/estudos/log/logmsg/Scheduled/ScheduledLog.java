@@ -14,18 +14,22 @@ import java.util.List;
 public class ScheduledLog {
 
     private final MessageService messageService;
-    private static final Logger logger = LoggerFactory.getLogger(ScheduledLog.class);
+    //private static final Logger logger = LoggerFactory.getLogger(ScheduledLog.class);
 
     public ScheduledLog(MessageService messages){
         this.messageService = messages;
     }
     @Scheduled(fixedDelay = 10000)
-    public void logMessage(){
-        List<Messages> messages = messageService.getMessages();
-        messages.forEach(c -> c.setLoggedMessage(true));
-        messages.forEach(c -> messageService.save(c));
-        messages.forEach(c -> logger.info(c.toString()));
-        System.out.println("------------------- CICLO ------------------------");
+    public void logMessage() throws Exception {
 
+        messageService.getMessages().map(c ->{
+            c.forEach( d -> {
+                d.setLoggedMessage(true);
+                messageService.save(d);
+                System.out.println(d.toString());
+            });
+            System.out.println("------------------- FIM DO CICLO ------------------------");
+            return c;
+        }).orElseThrow(() -> new RuntimeException("ERRO NA EXECUÇÃO"));
     }
 }

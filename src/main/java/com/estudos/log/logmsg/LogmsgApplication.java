@@ -23,9 +23,8 @@ public class LogmsgApplication {
 
 	@Bean
 	public CommandLineRunner commandLineRunner (@Autowired MessagesRepository messagesRepository){
-
 		return  args -> {
-			for (int i = 0; i < 1100; i++) {
+			for (int i = 0; i < 100; i++) {
 				Messages messages = new Messages();
 				messages.setMessage("Mensagem teste " + i);
 				messages.setTimeAt(new Date().getTime());
