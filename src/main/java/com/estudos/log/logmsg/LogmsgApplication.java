@@ -39,3 +39,4 @@ public class LogmsgApplication {
 	}
 
 }
+//update messages m set m.message_logged wher m.id =1
