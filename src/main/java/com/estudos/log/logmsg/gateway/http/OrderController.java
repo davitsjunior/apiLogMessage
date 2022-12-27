@@ -5,21 +5,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.estudos.log.logmsg.services.OrderProducer;
+import com.estudos.log.logmsg.services.MsgOrderProducerService;
 
 @RestController
 @RequestMapping(value = "/msgs/")
 public class OrderController {
 
-    private final OrderProducer orderProducer;
+    private final MsgOrderProducerService msgOrderProducerService;
 
-    public OrderController (OrderProducer orderProducer){
-        this.orderProducer = orderProducer;
+    public OrderController (MsgOrderProducerService msgOrderProducerService){
+        this.msgOrderProducerService = msgOrderProducerService;
     }
 
     @PostMapping()
     public void send(@RequestParam("msg") String msg){
-        orderProducer.send(msg);
+        msgOrderProducerService.send(msg);
     }
 
 }

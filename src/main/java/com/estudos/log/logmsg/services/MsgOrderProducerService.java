@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
-public class OrderProducer {
+public class MsgOrderProducerService {
     
     @Value("${order.topic}")
     private String orderTopic;
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    public OrderProducer (final KafkaTemplate kafkaTemplate){
+    public MsgOrderProducerService(final KafkaTemplate kafkaTemplate){
         this.kafkaTemplate = kafkaTemplate;
     }
 

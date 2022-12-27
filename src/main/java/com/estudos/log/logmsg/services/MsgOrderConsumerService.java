@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import com.estudos.log.logmsg.domain.entity.Messages;
 
 @Service
-public class OrderConsumer {
+public class MsgOrderConsumerService {
 
     private final MessageService messageService;
 
-    public OrderConsumer(MessageService messageService) {
+    public MsgOrderConsumerService(MessageService messageService) {
         this.messageService = messageService;
     }
     

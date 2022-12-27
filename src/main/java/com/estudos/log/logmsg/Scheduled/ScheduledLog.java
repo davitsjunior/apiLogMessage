@@ -1,16 +1,8 @@
 package com.estudos.log.logmsg.Scheduled;
 
-import com.estudos.log.logmsg.domain.entity.Messages;
 import com.estudos.log.logmsg.services.MessageService;
-import org.hibernate.annotations.Comment;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.net.Socket;
-import java.util.List;
 
 @Component
 public class ScheduledLog {
