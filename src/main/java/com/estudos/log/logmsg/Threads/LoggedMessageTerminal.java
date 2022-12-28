@@ -1,18 +1,17 @@
-package com.estudos.log.logmsg.Scheduled;
+package com.estudos.log.logmsg.Threads;
 
 import com.estudos.log.logmsg.services.MessageService;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
-public class ScheduledLog {
+public class LoggedMessageTerminal {
 
     private final MessageService messageService;
     //private static final Logger logger = LoggerFactory.getLogger(ScheduledLog.class);
 
-    public ScheduledLog(MessageService messages){
+    public LoggedMessageTerminal(MessageService messages){
         this.messageService = messages;
     }
 

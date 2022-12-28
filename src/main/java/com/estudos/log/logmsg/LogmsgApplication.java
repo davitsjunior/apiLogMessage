@@ -1,18 +1,17 @@
 package com.estudos.log.logmsg;
 
+import com.estudos.log.logmsg.Threads.LoggedMessageTerminal;
 import com.estudos.log.logmsg.domain.entity.Messages;
 import com.estudos.log.logmsg.domain.repository.MessagesRepository;
-import com.estudos.log.logmsg.services.MessageService;
+import com.estudos.log.logmsg.services.LogMessageExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpInputMessage;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import java.security.Timestamp;
 import java.util.Date;
 import java.util.UUID;
 
