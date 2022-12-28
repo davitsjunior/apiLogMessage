@@ -4,6 +4,8 @@ import com.estudos.log.logmsg.services.MessageService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class ScheduledLog {
 
@@ -13,17 +15,24 @@ public class ScheduledLog {
     public ScheduledLog(MessageService messages){
         this.messageService = messages;
     }
-    @Scheduled(fixedDelay = 10000)
+
     public void logMessage() throws Exception {
 
-        messageService.getMessages().map(c ->{
-            c.forEach( d -> {
-                d.setLoggedMessage(true);
-                messageService.save(d);
-                System.out.println(d.toString());
-            });
-            System.out.println("------------------- FIM DO CICLO ------------------------");
-            return c;
-        }).orElseThrow(() -> new RuntimeException("ERRO NA EXECUÇÃO"));
+        while (true){
+            messageService.getMessages().map(c ->{
+                c.forEach( d -> {
+                    long now = new Date().getTime();
+                    if (now - d.getTimeAt() > 5000){
+                        System.out.println(d.toString());
+                        d.setLoggedMessage(true);
+                        messageService.save(d);
+                        System.out.println(now - d.getTimeAt());
+                    }
+                });
+                System.out.println("------------------- FIM DO CICLO ------------------------");
+                return c;
+            }).orElseThrow(() -> new RuntimeException("ERRO NA EXECUÇÃO"));
+            Thread.sleep(2000);
+        }
     }
 }
