@@ -1,6 +1,6 @@
 package com.estudos.log.logmsg.services.impl;
 
-import com.estudos.log.logmsg.Scheduled.LoggedMessageSequencial;
+import com.estudos.log.logmsg.Scheduled.LoggedMessageTerminal;
 import com.estudos.log.logmsg.services.LogMessageExecutor;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +13,12 @@ public class LogMessageExecutorImpl implements LogMessageExecutor {
 
     private final ExecutorService executorService = Executors.newFixedThreadPool(1);
     @Override
-    public void execute(LoggedMessageSequencial loggedMessageSequencial) {
+    public void execute(LoggedMessageTerminal loggedMessageTerminal) {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    loggedMessageSequencial.logMessage();
+                    loggedMessageTerminal.logMessage();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

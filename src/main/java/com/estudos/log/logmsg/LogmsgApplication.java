@@ -1,6 +1,6 @@
 package com.estudos.log.logmsg;
 
-import com.estudos.log.logmsg.Scheduled.LoggedMessageSequencial;
+import com.estudos.log.logmsg.Scheduled.LoggedMessageTerminal;
 import com.estudos.log.logmsg.domain.entity.Messages;
 import com.estudos.log.logmsg.domain.repository.MessagesRepository;
 import com.estudos.log.logmsg.services.LogMessageExecutor;
@@ -22,7 +22,7 @@ public class LogmsgApplication {
 
 	@Bean
 	public CommandLineRunner commandLineRunner (@Autowired MessagesRepository messagesRepository,
-												@Autowired LogMessageExecutor logMessageExecutor, @Autowired LoggedMessageSequencial log){
+												@Autowired LogMessageExecutor logMessageExecutor, @Autowired LoggedMessageTerminal log){
 		return  args -> {
 			for (int i = 0; i < 10; i++) {
 				Messages messages = new Messages();

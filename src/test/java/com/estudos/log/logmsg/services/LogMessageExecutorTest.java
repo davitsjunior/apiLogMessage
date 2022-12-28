@@ -1,6 +1,6 @@
 package com.estudos.log.logmsg.services;
 
-import com.estudos.log.logmsg.Scheduled.LoggedMessageSequencial;
+import com.estudos.log.logmsg.Scheduled.LoggedMessageTerminal;
 import com.estudos.log.logmsg.domain.entity.Messages;
 import com.estudos.log.logmsg.domain.repository.MessagesRepository;
 import com.estudos.log.logmsg.services.impl.LogMessageExecutorImpl;
@@ -44,10 +44,10 @@ class LogMessageExecutorTest {
     @Test
     void testSequencial() throws Exception {
 
-        LoggedMessageSequencial loggedMessageSequencial = new LoggedMessageSequencial(messageService);
+        LoggedMessageTerminal loggedMessageTerminal = new LoggedMessageTerminal(messageService);
         Mockito.when(messageService.getMessages()).thenReturn(Optional.ofNullable(messages));
         LogMessageExecutor logMessageExecutor = new LogMessageExecutorImpl();
-        logMessageExecutor.execute(loggedMessageSequencial);
+        logMessageExecutor.execute(loggedMessageTerminal);
 
     }
 }
