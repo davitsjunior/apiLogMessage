@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-public class LoggedMessageTerminal {
+public class LoggedMessageSequencial {
 
     private final MessageService messageService;
 
-    public LoggedMessageTerminal(MessageService messages){
+    public LoggedMessageSequencial(MessageService messages){
         this.messageService = messages;
     }
 

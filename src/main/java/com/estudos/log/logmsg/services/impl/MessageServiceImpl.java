@@ -20,7 +20,6 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Optional<List<Messages>> getMessages() throws Exception {
-        Optional<List<Messages>> messages;
         return Optional.ofNullable(messagesRepository.findAllMessagesNotLog().orElseThrow(() -> new Exception("Erro na busca dos dados")));
     }
 
