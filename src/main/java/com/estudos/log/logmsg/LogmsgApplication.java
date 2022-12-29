@@ -1,6 +1,6 @@
 package com.estudos.log.logmsg;
 
-import com.estudos.log.logmsg.Scheduled.LoggedMessageTerminal;
+import com.estudos.log.logmsg.Threads.LoggedMessageTerminal;
 import com.estudos.log.logmsg.domain.entity.Messages;
 import com.estudos.log.logmsg.domain.repository.MessagesRepository;
 import com.estudos.log.logmsg.services.LogMessageExecutor;
@@ -24,13 +24,13 @@ public class LogmsgApplication {
 	public CommandLineRunner commandLineRunner (@Autowired MessagesRepository messagesRepository,
 												@Autowired LogMessageExecutor logMessageExecutor, @Autowired LoggedMessageTerminal log){
 		return  args -> {
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 100; i++) {
 				Messages messages = new Messages();
 				messages.setMessage("Mensagem teste " + i);
 				messages.setTimeAt(new Date().getTime());
 				messages.setMessageKey(UUID.randomUUID().toString());
 				messagesRepository.save(messages);
-				Thread.sleep(1000);
+				//Thread.sleep(1000);
 			}
 			logMessageExecutor.execute(log);
 		};

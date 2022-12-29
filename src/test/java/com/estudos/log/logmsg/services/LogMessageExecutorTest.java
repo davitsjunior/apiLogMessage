@@ -1,53 +1,58 @@
 package com.estudos.log.logmsg.services;
 
-import com.estudos.log.logmsg.Scheduled.LoggedMessageTerminal;
+import com.estudos.log.logmsg.Threads.LoggedMessageTerminal;
 import com.estudos.log.logmsg.domain.entity.Messages;
-import com.estudos.log.logmsg.domain.repository.MessagesRepository;
-import com.estudos.log.logmsg.services.impl.LogMessageExecutorImpl;
-import com.estudos.log.logmsg.services.impl.MessageServiceImpl;
-import org.junit.jupiter.api.BeforeAll;
+import com.estudos.log.logmsg.services.impl.LogMessageParallel;
+import com.estudos.log.logmsg.services.impl.LogMessageSeq;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.*;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @ExtendWith(MockitoExtension.class)
 class LogMessageExecutorTest {
 
-    private final Logger logger = Logger.getLogger(String.valueOf(LogMessageExecutorTest.class));
-    //static Messages message = new Messages();
-    static  List<Messages> messages = new ArrayList<>();
+    @Test
+    void testSequencial(){
+        System.out.println("-----------------------------------");
+        System.out.println("Executando Rotinha Sequencial");
+        System.out.println("-----------------------------------");
+        LogMessageExecutor executor = new LogMessageSeq();
+        for (LoggedMessageTerminal log : getList()){
+            executor.execute(log);
+        }
+    }
 
-    @Mock
-    MessagesRepository messagesRepository;
+    @Test
+    void testParalelo(){
+        System.out.println("-----------------------------------");
+        System.out.println("Executando Rotinha Paralela");
+        System.out.println("-----------------------------------");
+        LogMessageExecutor executor = new LogMessageParallel();
+        for (LoggedMessageTerminal log : getList()){
+            executor.execute(log);
+        }
+        try {
+            Thread.sleep(100);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
 
-    @Mock
-    MessageServiceImpl messageService;
-
-    @BeforeAll
-    public static void setup() throws InterruptedException {
-        for (int i = 0; i < 10; i++) {
+    private List<LoggedMessageTerminal> getList(){
+        List<LoggedMessageTerminal> log = new ArrayList<>();
+        for (int i = 0; i < 50; i++) {
             Messages message = new Messages();
             message.setId(i);
             message.setMessage("Mensagem teste " + i);
             message.setTimeAt(new Date().getTime());
             message.setMessageKey(UUID.randomUUID().toString());
-            messages.add(message);
-            Thread.sleep(1000);
+            log.add(new LoggedMessageTerminal(message));
         }
-    }
-
-    @Test
-    void testSequencial() throws Exception {
-
-        LoggedMessageTerminal loggedMessageTerminal = new LoggedMessageTerminal(messageService);
-        Mockito.when(messageService.getMessages()).thenReturn(Optional.ofNullable(messages));
-        LogMessageExecutor logMessageExecutor = new LogMessageExecutorImpl();
-        logMessageExecutor.execute(loggedMessageTerminal);
-
+        return log;
     }
 }
