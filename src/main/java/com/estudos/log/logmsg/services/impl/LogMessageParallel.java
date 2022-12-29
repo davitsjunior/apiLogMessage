@@ -13,7 +13,7 @@ public class LogMessageParallel implements LogMessageExecutor {
 
     private final ExecutorService executorService = Executors.newFixedThreadPool(10);
     @Override
-    public void execute(LoggedMessageTerminal loggedMessageTerminal) {
+    public void execute(final LoggedMessageTerminal loggedMessageTerminal) {
         executorService.execute(new Runnable() {
             @Override
             public void run() {

@@ -19,7 +19,7 @@ class LogMessageExecutorTest {
     @Test
     void testSequencial(){
         System.out.println("-----------------------------------");
-        System.out.println("Executando Rotinha Sequencial");
+        System.out.println("Executando Rotina Sequencial");
         System.out.println("-----------------------------------");
         LogMessageExecutor executor = new LogMessageSeq();
         for (LoggedMessageTerminal log : getList()){

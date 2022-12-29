@@ -17,7 +17,6 @@ public class LoggedMessageTerminal {
     }
 
     public void logMessage(){
-
         try {
             Thread.sleep(5);
         }catch (InterruptedException e){
