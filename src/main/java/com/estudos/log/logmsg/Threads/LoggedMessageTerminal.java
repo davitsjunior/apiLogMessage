@@ -9,14 +9,12 @@ import java.util.Date;
 public class LoggedMessageTerminal {
 
     private final MessageService messageService;
-    //private static final Logger logger = LoggerFactory.getLogger(ScheduledLog.class);
 
     public LoggedMessageTerminal(MessageService messages){
         this.messageService = messages;
     }
 
     public void logMessage() throws Exception {
-
         while (true){
             messageService.getMessages().map(c ->{
                 c.forEach( d -> {
