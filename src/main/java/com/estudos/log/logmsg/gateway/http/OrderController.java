@@ -21,5 +21,4 @@ public class OrderController {
     public void send(@RequestParam("msg") String msg){
         msgOrderProducerService.send(msg);
     }
-
 }

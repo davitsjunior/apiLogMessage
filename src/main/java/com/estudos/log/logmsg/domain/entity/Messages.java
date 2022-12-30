@@ -1,8 +1,10 @@
 package com.estudos.log.logmsg.domain.entity;
 
 import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
 
 @Entity
+@Component
 public class Messages {
 
     @Id
